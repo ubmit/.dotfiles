@@ -1,0 +1,32 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "reason",
+    "svelte",
+    "html",
+    "json",
+    "css",
+    "markdown",
+    "yaml"
+  ],
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "wxss.validate": false,
+  "prettier.eslintIntegration": true,
+  "prettier.stylelintIntegration": true,
+  "eslint.autoFixOnSave": true,
+  "stylelintplus.autoFixOnSave": true,
+  "javascript.suggest.autoImports": true,
+  "typescript.suggest.autoImports": true,
+  "languageserver": {
+    "ocaml": {
+      "command": "ocaml-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["ocaml"]
+    }
+  }
+}
