@@ -1,0 +1,23 @@
+[user]
+	name = Guilherme de Andrade
+	email = guilhermedeandrade@protonmail.com
+[core]
+  editor = vim
+	excludesfile = ~/.gitignore_global
+	pager = diff-so-fancy | less --tabs=2 -RFX
+[commit]
+	template = ~/.stCommitMsg
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = "#bb0000"
+	oldHighlight = "#bb0000 reverse"
+	newNormal = "#009900"
+	newHighlight = "#009900 reverse"
+[color "diff"]
+	meta = "#0000cc"
+	frag = "#333333 #dddddd"
+	func = "#666666 #dddddd"
+	old = "#bb0000"
+	new = "#009900"
+	whitespace = "#0000ff reverse"
