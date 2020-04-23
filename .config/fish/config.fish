@@ -29,5 +29,8 @@ if [ -f '/Users/guilherme/google-cloud-sdk/path.fish.inc' ]; . '/Users/guilherme
 # fzf ripgrep
 set -gx FZF_DEFAULT_COMMAND  'rg --files --follow --hidden'
 
+# hide the fish greeting
+set fish_greeting ""
+
 # execute starship
 starship init fish | source
