@@ -8,6 +8,9 @@ call plug#begin('~/.config/nvim/plugged')
   " add the nightfly theme
   Plug 'bluz71/vim-nightfly-guicolors'
 
+  " add the dracula theme
+  Plug 'dracula/vim', { 'as': 'dracula' }
+
   " add a status line 
   Plug 'itchyny/lightline.vim'
 
@@ -47,9 +50,6 @@ call plug#begin('~/.config/nvim/plugged')
 
   " manage tags files
   Plug 'ludovicchabant/vim-gutentags'
-
-  " add filetype glyphs
-  Plug 'ryanoasis/vim-devicons'
 
   " add NERDTree file system explorer
   Plug 'preservim/nerdtree'
@@ -165,7 +165,7 @@ set termguicolors
 " ---------------------------------------------
 " THEME 
 " ---------------------------------------------
-colorscheme nightfly
+colorscheme dracula
 
 " ---------------------------------------------
 " LIGHTLINE 
