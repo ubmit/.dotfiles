@@ -5,9 +5,6 @@ call plug#begin('~/.config/nvim/plugged')
   " add a good enough default config
   Plug 'tpope/vim-sensible'
 
-  " add the nightfly theme
-  Plug 'bluz71/vim-nightfly-guicolors'
-
   " add the dracula theme
   Plug 'dracula/vim', { 'as': 'dracula' }
 
@@ -26,9 +23,6 @@ call plug#begin('~/.config/nvim/plugged')
   " add support for TypeScript
   Plug 'HerringtonDarkholme/yats.vim'
 
-  " provide insert mode auto-completion for quotes, parens, brackets, etc
-  Plug 'Raimondi/delimitMate'
-
   " add intellisense engine
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -37,9 +31,6 @@ call plug#begin('~/.config/nvim/plugged')
   
   " add support for OCaml
   Plug 'ocaml/vim-ocaml'
-
-  " add support for Svelte
-  Plug 'evanleck/vim-svelte'
 
   " add support for EditorConfig
   Plug 'editorconfig/editorconfig-vim'
@@ -54,8 +45,32 @@ call plug#begin('~/.config/nvim/plugged')
   " add NERDTree file system explorer
   Plug 'preservim/nerdtree'
 
+  " integrate NERDTree with Git 
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+
+  " add syntax highlighting to NERDTree
+  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+  " add folders/files icons
+  Plug 'ryanoasis/vim-devicons'
+
   " auto close (X)HTML tags
   Plug 'alvan/vim-closetag'
+
+  " add support for styled-components
+  Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+
+  " add Git info to the gutter
+  Plug 'airblade/vim-gitgutter'
+
+  " add bindings to comment stuff out
+  Plug 'tpope/vim-commentary' 
+
+  " add a collection of snippets
+  Plug 'honza/vim-snippets'
+
+  " add support for Prisma 2
+  Plug 'pantharshit00/vim-prisma'
 call plug#end()
 
 " ---------------------------------------------
@@ -151,9 +166,6 @@ inoremap <C-U> <C-G>u<C-U>
 " ---------------------------------------------
 set nowrap                  " do not wrap lines
 
-let g:netrw_banner = 0      " remove unnecessary header from netrw
-let g:netrw_liststyle = 3   " display files as a tree
-
 let mapleader = "\<Space>"  " Setup leader key
 
 set expandtab               " convert tabs to the spaces
@@ -170,7 +182,7 @@ colorscheme dracula
 " ---------------------------------------------
 " LIGHTLINE 
 " ---------------------------------------------
-let g:lightline = { 'colorscheme': 'nightfly' }
+let g:lightline = { 'colorscheme': 'dracula' }
 
 " ---------------------------------------------
 " FZF 
@@ -180,11 +192,20 @@ nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>h :History<CR>
 nnoremap <Leader>t :BTags<CR>
 nnoremap <Leader>T :Tags<CR>
+nnoremap <Leader>l :Lines<CR>
+
+" ---------------------------------------------
+" RG 
+" ---------------------------------------------
+nnoremap <silent> <Leader>u :Rg <C-R><C-W><CR>
 
 " ---------------------------------------------
 " NERDTREE 
 " ---------------------------------------------
 noremap <silent> <leader><tab> :NERDTreeToggle<CR>
+
+" display hidden files
+let NERDTreeShowHidden=1
 
 " ---------------------------------------------
 " CLOSETAG 
@@ -196,7 +217,22 @@ let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
 " COC
 " ---------------------------------------------
 " extensions
-let g:coc_global_extensions = ['coc-css', 'coc-jest', 'coc-tsserver', 'coc-emmet', 'coc-html', 'coc-yaml', 'coc-eslint', 'coc-prettier', 'coc-json', 'coc-reason', 'coc-svelte', 'coc-stylelintplus']
+let g:coc_global_extensions = [
+      \ 'coc-css',
+      \ 'coc-jest',
+      \ 'coc-tsserver',
+      \ 'coc-emmet',
+      \ 'coc-html',
+      \ 'coc-yaml',
+      \ 'coc-eslint',
+      \ 'coc-prettier', 
+      \ 'coc-json',
+      \ 'coc-reason',
+      \ 'coc-stylelintplus',
+      \ 'coc-pairs',
+      \ 'coc-snippets',
+      \ 'coc-deno',
+      \ ]
 
 " TextEdit might fail if hidden is not set.
 set hidden
