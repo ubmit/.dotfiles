@@ -5,7 +5,6 @@
     "typescript",
     "typescriptreact",
     "reason",
-    "svelte",
     "html",
     "json",
     "css",
@@ -28,5 +27,9 @@
       "args": ["--stdio"],
       "filetypes": ["ocaml"]
     }
+  },
+  "snippets.extends": {
+    "javascriptreact": ["javascript"],
+    "typescript": ["javascript"]
   }
 }
