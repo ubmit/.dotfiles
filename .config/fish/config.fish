@@ -30,7 +30,18 @@ if [ -f '/Users/guilherme/google-cloud-sdk/path.fish.inc' ]; . '/Users/guilherme
 set -gx FZF_DEFAULT_COMMAND  'rg --files --follow --hidden'
 
 # hide the fish greeting
-set fish_greeting ""
+set fish_greeting "Don’t compare yourself with anyone in this world... if you do so, you are insulting yourself."\n"- Bill Gates"
 
 # execute starship
 starship init fish | source
+
+# add android studio paths
+set ANDROID_HOME = $HOME/Library/Android/sdk
+set ANDROID_SDK_ROOT = $HOME/Library/Android/sdk
+
+set PATH $ANDROID_HOME/emulator $PATH
+set PATH $ANDROID_HOME/tools $PATH
+set PATH $ANDROID_HOME/tools/bin $PATH
+set PATH $ANDROID_HOME/platform-tools $PATH
+
+
