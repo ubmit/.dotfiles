@@ -4,8 +4,8 @@
     "javascriptreact",
     "typescript",
     "typescriptreact",
-    "reason",
     "html",
+    "reason",
     "json",
     "css",
     "markdown",
@@ -29,7 +29,8 @@
     }
   },
   "snippets.extends": {
+    "typescript": ["javascript"],
     "javascriptreact": ["javascript"],
-    "typescript": ["javascript"]
+    "typescriptreact": ["typescript"]
   }
 }
