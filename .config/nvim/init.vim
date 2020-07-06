@@ -5,8 +5,8 @@ call plug#begin('~/.config/nvim/plugged')
   " add a good enough default config
   Plug 'tpope/vim-sensible'
 
-  " add the dracula theme
-  Plug 'dracula/vim', { 'as': 'dracula' }
+  " add the nightfly theme
+  Plug 'bluz71/vim-nightfly-guicolors'
 
   " add a status line 
   Plug 'itchyny/lightline.vim'
@@ -39,9 +39,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'junegunn/fzf', { 'do': './install --bin' }
   Plug 'junegunn/fzf.vim'
 
-  " manage tags files
-  Plug 'ludovicchabant/vim-gutentags'
-
   " add NERDTree file system explorer
   Plug 'preservim/nerdtree'
 
@@ -71,6 +68,9 @@ call plug#begin('~/.config/nvim/plugged')
 
   " add support for Prisma 2
   Plug 'pantharshit00/vim-prisma'
+
+  " add support for GraphQL
+  Plug 'jparise/vim-graphql'
 call plug#end()
 
 " ---------------------------------------------
@@ -93,7 +93,6 @@ endif
 
 set backspace=indent,eol,start
 set complete-=i
-set smarttab
 
 set nrformats-=octal
 
@@ -168,21 +167,27 @@ set nowrap                  " do not wrap lines
 
 let mapleader = "\<Space>"  " Setup leader key
 
+set smarttab
 set expandtab               " convert tabs to the spaces
-set tabstop=2               " 2 spaces
-set shiftwidth=2
+set tabstop=2               " how many columns a tab counts for 
+set shiftwidth=2            " how many columns text is indent using reindent operations
+set softtabstop=2           " how many columns are using when hitting tab in insert mode 
+
+filetype plugin indent off
 
 set termguicolors
+
+set clipboard+=unnamedplus " use system clipboard
 
 " ---------------------------------------------
 " THEME 
 " ---------------------------------------------
-colorscheme dracula
+colorscheme nightfly
 
 " ---------------------------------------------
 " LIGHTLINE 
 " ---------------------------------------------
-let g:lightline = { 'colorscheme': 'dracula' }
+let g:lightline = { 'colorscheme': 'nightfly' }
 
 " ---------------------------------------------
 " FZF 
@@ -231,6 +236,7 @@ let g:coc_global_extensions = [
       \ 'coc-stylelintplus',
       \ 'coc-pairs',
       \ 'coc-snippets',
+      \ 'coc-prisma',
       \ ]
 
 " TextEdit might fail if hidden is not set.
