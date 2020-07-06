@@ -29,3 +29,9 @@ alias nd "npm run dev"
 alias nt "npm run test"
 alias ntw "nt -- --watch"
 alias ntc "nt -- --coverage"
+
+# vscode
+alias code code-insiders
+
+# yarn/npm run
+alias run "bash $HOME/scripts/run.sh"
