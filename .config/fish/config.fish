@@ -20,7 +20,20 @@ fnm env --multi --use-on-cd --shell=fish | source
 set -gx FZF_DEFAULT_COMMAND  'rg --files --follow --hidden'
 
 # set fish greeting
-set fish_greeting "Don’t compare yourself with anyone in this world... if you do so, you are insulting yourself."\n"- Bill Gates"
+
+set quotes "\"Obstacles don’t have to stop you. If you run into a wall, don’t turn around and give up. Figure out how to climb it, go through it, or work around it.\""\n"- Michael Jordan" "\"Don’t compare yourself with anyone in this world... if you do so, you are insulting yourself.\""\n"- Bill Gates" "\"Don't fly too close to the sun.\"" "\"A única coisa que ninguém pode roubar de você é o seu conhecimento.\""\n"- Mamãe"
+
+# set number_of_quotes 0
+# set quotes 
+
+# while read quote
+#    set number_of_quotes (math $number_of_quotes + 1)
+#    set quotes[$number_of_quotes] $quote
+# end < quotes.txt
+
+set random_quote $quotes[(random 1 (count $quotes))]
+
+set fish_greeting $random_quote 
 
 # execute starship
 starship init fish | source
