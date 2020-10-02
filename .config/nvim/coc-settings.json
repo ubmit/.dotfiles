@@ -7,10 +7,11 @@
     "html",
     "reason",
     "css",
-    "markdown",
     "yaml",
     "json",
-    "prisma"
+    "prisma",
+    "elixir",
+    "ruby"
   ],
   "css.validate": false,
   "less.validate": false,
@@ -29,9 +30,9 @@
       "filetypes": ["ocaml"]
     }
   },
-  "snippets.extends": {
-    "typescript": ["javascript"],
-    "javascriptreact": ["javascript"],
-    "typescriptreact": ["typescript"]
-  }
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "eruby": "html"
+  },
+  "solargraph.formatting": true
 }
