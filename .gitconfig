@@ -19,3 +19,5 @@
 	old = "#bb0000"
 	new = "#009900"
 	whitespace = "#0000ff reverse"
+[init]
+	defaultBranch = main
