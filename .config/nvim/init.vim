@@ -5,8 +5,8 @@ call plug#begin('~/.config/nvim/plugged')
   " add a good enough default config
   Plug 'tpope/vim-sensible'
 
-  " add the nightfly theme
-  Plug 'bluz71/vim-nightfly-guicolors'
+  " add the apprentice theme
+  Plug 'romainl/Apprentice', {'branch': 'fancylines-and-neovim'}
 
   " add a status line 
   Plug 'itchyny/lightline.vim'
@@ -63,14 +63,39 @@ call plug#begin('~/.config/nvim/plugged')
   " add bindings to comment stuff out
   Plug 'tpope/vim-commentary' 
 
-  " add a collection of snippets
-  Plug 'honza/vim-snippets'
-
   " add support for Prisma 2
   Plug 'pantharshit00/vim-prisma'
 
   " add support for GraphQL
   Plug 'jparise/vim-graphql'
+
+  " add support for markdown preview 
+  function! BuildComposer(info)
+    if a:info.status != 'unchanged' || a:info.force
+      if has('nvim')
+        !cargo build --release --locked
+      else
+        !cargo build --release --locked --no-default-features --features json-rpc
+      endif
+    endif
+  endfunction
+
+  Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+
+  " add syntax highlighting to Elixir
+  Plug 'elixir-editors/vim-elixir'
+
+  " add support for Git
+  Plug 'tpope/vim-fugitive'
+
+  " add syntax highlighting to Ruby
+  Plug 'vim-ruby/vim-ruby'
+
+  " add support for Ruby on Rails development
+  Plug 'tpope/vim-rails'
+
+  " add snippets
+  Plug 'honza/vim-snippets'
 call plug#end()
 
 " ---------------------------------------------
@@ -163,31 +188,50 @@ inoremap <C-U> <C-G>u<C-U>
 " ---------------------------------------------
 " GENERAL 
 " ---------------------------------------------
+set number                  " on line numbers
 set nowrap                  " do not wrap lines
 
-let mapleader = "\<Space>"  " Setup leader key
+let mapleader = "\<Space>"  " setup leader key
 
 set smarttab
+set autoindent
+set smartindent
+
 set expandtab               " convert tabs to the spaces
 set tabstop=2               " how many columns a tab counts for 
 set shiftwidth=2            " how many columns text is indent using reindent operations
 set softtabstop=2           " how many columns are using when hitting tab in insert mode 
 
-filetype plugin indent off
-
 set termguicolors
 
-set clipboard+=unnamedplus " use system clipboard
+set clipboard+=unnamedplus  " use system clipboard
+
+set splitbelow              " move cursor to the new vertical split
+set splitright              " move cursor to the new horizontal split
 
 " ---------------------------------------------
 " THEME 
 " ---------------------------------------------
-colorscheme nightfly
+colorscheme apprentice
 
 " ---------------------------------------------
 " LIGHTLINE 
 " ---------------------------------------------
-let g:lightline = { 'colorscheme': 'nightfly' }
+let g:lightline = {
+      \ 'colorscheme': 'apprentice',
+      \ 'component_function': {
+      \   'filename': 'LightlineFilename',
+      \ }
+      \ }
+
+function! LightlineFilename()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction
 
 " ---------------------------------------------
 " FZF 
@@ -195,9 +239,9 @@ let g:lightline = { 'colorscheme': 'nightfly' }
 nnoremap <C-p> :Files<CR>
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>h :History<CR>
-nnoremap <Leader>t :BTags<CR>
-nnoremap <Leader>T :Tags<CR>
 nnoremap <Leader>l :Lines<CR>
+nnoremap <Leader>C :Commits<CR>
+nnoremap <Leader>c :BCommits<CR>
 
 " ---------------------------------------------
 " RG 
@@ -237,6 +281,10 @@ let g:coc_global_extensions = [
       \ 'coc-pairs',
       \ 'coc-snippets',
       \ 'coc-prisma',
+      \ 'coc-styled-components',
+      \ 'coc-elixir',
+      \ 'coc-inline-jest',
+      \ 'coc-solargraph',
       \ ]
 
 " TextEdit might fail if hidden is not set.
