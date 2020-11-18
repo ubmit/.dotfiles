@@ -1,6 +1,8 @@
 [user]
 	name = Guilherme de Andrade
 	email = guilhermedeandrade@protonmail.com
+[includeIf "gitdir:~/workspace/new-work/"]
+  path = .gitconfig-new-work
 [core]
   editor = vim
 	excludesfile = ~/.gitignore_global
