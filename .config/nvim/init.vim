@@ -5,8 +5,8 @@ call plug#begin('~/.config/nvim/plugged')
   " add a good enough default config
   Plug 'tpope/vim-sensible'
 
-  " add the apprentice theme
-  Plug 'romainl/Apprentice', {'branch': 'fancylines-and-neovim'}
+  " themes
+  Plug 'NLKNguyen/papercolor-theme'
 
   " add a status line 
   Plug 'itchyny/lightline.vim'
@@ -25,12 +25,6 @@ call plug#begin('~/.config/nvim/plugged')
 
   " add intellisense engine
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-  " add support for ReasonML
-  Plug 'reasonml-editor/vim-reason-plus'
-  
-  " add support for OCaml
-  Plug 'ocaml/vim-ocaml'
 
   " add support for EditorConfig
   Plug 'editorconfig/editorconfig-vim'
@@ -69,19 +63,6 @@ call plug#begin('~/.config/nvim/plugged')
   " add support for GraphQL
   Plug 'jparise/vim-graphql'
 
-  " add support for markdown preview 
-  function! BuildComposer(info)
-    if a:info.status != 'unchanged' || a:info.force
-      if has('nvim')
-        !cargo build --release --locked
-      else
-        !cargo build --release --locked --no-default-features --features json-rpc
-      endif
-    endif
-  endfunction
-
-  Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
-
   " add syntax highlighting to Elixir
   Plug 'elixir-editors/vim-elixir'
 
@@ -93,6 +74,22 @@ call plug#begin('~/.config/nvim/plugged')
 
   " add support for Ruby on Rails development
   Plug 'tpope/vim-rails'
+
+  " run tests within vim 
+  Plug 'vim-test/vim-test'
+
+  " add markdown preview
+  function! BuildComposer(info)
+    if a:info.status != 'unchanged' || a:info.force
+      if has('nvim')
+        !cargo build --release --locked
+      else
+        !cargo build --release --locked --no-default-features --features json-rpc
+      endif
+    endif
+  endfunction
+
+  Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 
   " add snippets
   Plug 'honza/vim-snippets'
@@ -188,7 +185,6 @@ inoremap <C-U> <C-G>u<C-U>
 " ---------------------------------------------
 " GENERAL 
 " ---------------------------------------------
-set number                  " on line numbers
 set nowrap                  " do not wrap lines
 
 let mapleader = "\<Space>"  " setup leader key
@@ -212,13 +208,13 @@ set splitright              " move cursor to the new horizontal split
 " ---------------------------------------------
 " THEME 
 " ---------------------------------------------
-colorscheme apprentice
+colorscheme PaperColor
 
 " ---------------------------------------------
 " LIGHTLINE 
 " ---------------------------------------------
 let g:lightline = {
-      \ 'colorscheme': 'apprentice',
+      \ 'colorscheme': 'PaperColor',
       \ 'component_function': {
       \   'filename': 'LightlineFilename',
       \ }
@@ -238,10 +234,8 @@ endfunction
 " ---------------------------------------------
 nnoremap <C-p> :Files<CR>
 nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>h :History<CR>
-nnoremap <Leader>l :Lines<CR>
+nnoremap <Leader>l :BLines<CR>
 nnoremap <Leader>C :Commits<CR>
-nnoremap <Leader>c :BCommits<CR>
 
 " ---------------------------------------------
 " RG 
@@ -263,6 +257,54 @@ let g:closetag_close_shortcut = ''
 let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
 
 " ---------------------------------------------
+" LIGHT/DARK MODE SWITHCER 
+" ---------------------------------------------
+command! DarkMode :call DarkMode()
+command! LightMode :call LightMode()
+
+function! LightlineReload()
+  call lightline#init()
+  call lightline#colorscheme()
+  call lightline#update()
+endfunction
+
+function! DarkMode()
+  set background=dark
+  let g:lightline.colorscheme = 'PaperColor_dark'
+  call LightlineReload()
+endfunction
+
+function! LightMode()
+  set background=light
+  let g:lightline.colorscheme = 'PaperColor_light'
+  call LightlineReload()
+endfunction
+
+function! ChangeColorScheme(channel, msg)
+  let time = trim(a:msg)
+  if time ==# "day"
+    call LightMode()
+  else
+    call DarkMode()
+  endif
+endfunction
+
+function! Sunshine(timer)
+  if executable("sunshine")
+    let job = jobstart(["sunshine", "-s", "!#Porto"], {"out_cb": "ChangeColorScheme"})
+  else
+    call DarkMode()
+  endif
+endfunction
+
+function! AutoDarkModeSetup()
+  let timer = timer_start(30000, 'Sunshine', {'repeat': -1})
+  call Sunshine(timer) " Initial call to setup the theme
+endfunction
+
+call AutoDarkModeSetup()
+
+" ---------------------------------------------
 " COC
 " ---------------------------------------------
 " extensions
@@ -276,7 +318,6 @@ let g:coc_global_extensions = [
       \ 'coc-eslint',
       \ 'coc-prettier', 
       \ 'coc-json',
-      \ 'coc-reason',
       \ 'coc-stylelintplus',
       \ 'coc-pairs',
       \ 'coc-snippets',
