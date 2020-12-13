@@ -35,3 +35,8 @@ alias code code-insiders
 
 # yarn/npm run
 alias run "bash $HOME/scripts/run.sh"
+
+# change kitty theme to light/dark
+alias dark-theme "kitty @ set-colors -a -c \"$HOME/.config/kitty/themes/papercolor-dark.conf\""
+alias light-theme "kitty @ set-colors -a -c \"$HOME/.config/kitty/themes/papercolor-light.conf\""
+

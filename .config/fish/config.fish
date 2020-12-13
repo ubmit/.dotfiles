@@ -19,15 +19,29 @@ fnm env --use-on-cd --shell=fish | source
 # fzf ripgrep
 set -gx FZF_DEFAULT_COMMAND  'rg --files --follow --hidden'
 
-# set fish greeting
-set quotes "\"Obstacles don’t have to stop you. If you run into a wall, don’t turn around and give up. Figure out how to climb it, go through it, or work around it.\""\n"- Michael Jordan" "\"Don’t compare yourself with anyone in this world... if you do so, you are insulting yourself.\""\n"- Bill Gates" "\"Don't fly too close to the sun.\"" "\"A única coisa que ninguém pode roubar de você é o seu conhecimento.\""\n"- Mamãe"
-
-set random_quote $quotes[(random 1 (count $quotes))]
-
-set fish_greeting $random_quote 
-
 # execute starship
 starship init fish | source
 
-# Load rbenv automatically by appending
+# load rbenv
 status --is-interactive; and source (rbenv init -|psub)
+
+# add man pages to PATH
+set PATH /usr/local/opt/erlang/lib/erlang/man $PATH
+
+# add cargo to PATH
+set PATH $HOME/.cargo/bin $PATH
+
+# remove greeting
+set fish_greeting
+
+# add ruby gems to PATH
+set PATH $HOME/.rbenv/versions/*/lib/ruby/gems $PATH
+
+# automatically change kitty colors based on time of day
+if command -v "sunshine" >/dev/null
+  if [ (sunshine -s "!#Porto") = "day" ]
+    light-theme
+  else
+    dark-theme
+  end
+end
