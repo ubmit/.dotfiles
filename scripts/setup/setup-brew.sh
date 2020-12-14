@@ -4,12 +4,11 @@ echo "Installing Homebrew..."
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-echo "Adding taps"
+echo "Adding taps..."
 brew tap homebrew/cask-fonts
 brew tap crescentrose/sunshine
 
-echo "Installing macOS formulae"
-
+echo "Installing macOS formulae..."
 brew install bat
 brew install diff-so-fancy
 brew install elixir
@@ -28,9 +27,9 @@ brew install yarn
 brew install rbenv
 brew install httpie
 brew install sunshine
+brew install wget
 
-echo "Installing casks"
-
+echo "Installing casks..."
 brew cask install firefox
 brew cask install 1password
 brew cask install alfred
@@ -48,4 +47,3 @@ brew cask install visual-studio-code-insiders
 brew cask install slack
 brew cask install discord
 brew cask install spotify
-
