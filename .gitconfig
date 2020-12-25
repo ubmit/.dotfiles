@@ -23,3 +23,5 @@
 	whitespace = "#0000ff reverse"
 [init]
 	defaultBranch = main
+[github]
+	user = guilhermedeandrade
