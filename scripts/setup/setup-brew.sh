@@ -6,13 +6,11 @@ echo "Installing Homebrew..."
 
 echo "Adding taps..."
 brew tap homebrew/cask-fonts
-brew tap crescentrose/sunshine
 
 echo "Installing macOS formulae..."
 brew install bat
 brew install diff-so-fancy
 brew install elixir
-brew install rust
 brew install fish
 brew install fnm
 brew install fzf
@@ -26,23 +24,28 @@ brew install tree
 brew install yarn
 brew install rbenv
 brew install httpie
-brew install sunshine
 brew install wget
+brew install cmake
+brew install qmk/qmk/qmk
+brew install gnupg
 
 echo "Installing casks..."
-brew cask install firefox
-brew cask install 1password
-brew cask install alfred
-brew cask install dozer
-brew cask install font-jetbrains-mono-nerd-font
-brew cask install insomnia
-brew cask install keepingyouawake
-brew cask install keka
-brew cask install kitty
-brew cask install maccy
-brew cask install rectangle
-brew cask install postbird
-brew cask install visual-studio-code-insiders
-brew cask install slack
-brew cask install discord
-brew cask install spotify
+brew install --cask docker
+brew install --cask firefox
+brew install --cask 1password
+brew install --cask alfred
+brew install --cask dozer
+brew install --cask font-jetbrains-mono-nerd-font
+brew install --cask insomnia
+brew install --cask keepingyouawake
+brew install --cask keka
+brew install --cask kitty
+brew install --cask maccy
+brew install --cask rectangle
+brew install --cask postbird
+brew install --cask visual-studio-code-insiders
+brew install --cask slack
+brew install --cask discord
+brew install --cask spotify
+brew install --cask via
+

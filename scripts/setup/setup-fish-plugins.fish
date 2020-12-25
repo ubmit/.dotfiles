@@ -12,4 +12,6 @@ fisher install joseluisq/gitnow@2.5.1
 fisher install laughedelic/pisces
 fisher install laughedelic/fish_logo
 fisher install jhillyerd/plugin-git
-fisher install danhper/fish-ssh-agent
+
+echo "Installing plugins that aren't available through Fisher..."
+wget https://gitlab.com/kyb/fish_ssh_agent/raw/master/functions/fish_ssh_agent.fish -P ~/.config/fish/functions/
