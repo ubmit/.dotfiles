@@ -209,6 +209,7 @@ set splitright              " move cursor to the new horizontal split
 " THEME 
 " ---------------------------------------------
 colorscheme PaperColor
+set background=light
 
 " ---------------------------------------------
 " LIGHTLINE 
@@ -255,54 +256,6 @@ let NERDTreeShowHidden=1
 " ---------------------------------------------
 let g:closetag_close_shortcut = ''
 let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
-
-" ---------------------------------------------
-" LIGHT/DARK MODE SWITHCER 
-" ---------------------------------------------
-command! DarkMode :call DarkMode()
-command! LightMode :call LightMode()
-
-function! LightlineReload()
-  call lightline#init()
-  call lightline#colorscheme()
-  call lightline#update()
-endfunction
-
-function! DarkMode()
-  set background=dark
-  let g:lightline.colorscheme = 'PaperColor_dark'
-  call LightlineReload()
-endfunction
-
-function! LightMode()
-  set background=light
-  let g:lightline.colorscheme = 'PaperColor_light'
-  call LightlineReload()
-endfunction
-
-function! ChangeColorScheme(channel, msg)
-  let time = trim(a:msg)
-  if time ==# "day"
-    call LightMode()
-  else
-    call DarkMode()
-  endif
-endfunction
-
-function! Sunshine(timer)
-  if executable("sunshine")
-    let job = jobstart(["sunshine", "-s", "!#Porto"], {"out_cb": "ChangeColorScheme"})
-  else
-    call DarkMode()
-  endif
-endfunction
-
-function! AutoDarkModeSetup()
-  let timer = timer_start(30000, 'Sunshine', {'repeat': -1})
-  call Sunshine(timer) " Initial call to setup the theme
-endfunction
-
-call AutoDarkModeSetup()
 
 " ---------------------------------------------
 " COC
