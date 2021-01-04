@@ -13,7 +13,6 @@
 - [Introduction](#scroll-introduction)
 - [Installation](#construction_worker-installation)
 - [Getting Started](#runner-getting-started)
-- [Notes](#spiral_notepad-notes)
 - [Acknowledgments](#pray-acknowledgments)
 
 ## :scroll: Introduction
@@ -30,7 +29,7 @@ rsync --recursive --verbose --exclude '.git' tmpdotfiles/ $HOME/
 rm -r tmpdotfiles
 ```
 
-Note that the `main` branch is meant to be used with macOS. The `--branch` flag should be changed to either `wsl` or `linux` if you aren't using it.
+Note that the `main` branch is meant to be used with macOS. The `--branch` flag should be changed to either `wsl` or `manjaro` if you aren't using it.
 
 ## :runner: Getting Started
 
@@ -50,10 +49,6 @@ dotfiles commit -m "commit message"
 ```sh
 dotfiles push
 ```
-
-## :spiral_notepad: Notes
-
-The `wsl` branch is outdated and the `linux` has yet to be created.
 
 ## :pray: Acknowledgments
 
