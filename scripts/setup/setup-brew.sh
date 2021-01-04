@@ -9,10 +9,7 @@ brew tap homebrew/cask-fonts
 
 echo "Installing macOS formulae..."
 brew install bat
-brew install diff-so-fancy
-brew install elixir
 brew install fish
-brew install fnm
 brew install fzf
 brew install git
 brew install neovim
@@ -22,12 +19,11 @@ brew install tldr
 brew install tmux
 brew install tree
 brew install yarn
-brew install rbenv
 brew install httpie
 brew install wget
 brew install cmake
 brew install qmk/qmk/qmk
-brew install gnupg
+brew install git-delta
 
 echo "Installing casks..."
 brew install --cask docker
@@ -48,4 +44,3 @@ brew install --cask slack
 brew install --cask discord
 brew install --cask spotify
 brew install --cask via
-
