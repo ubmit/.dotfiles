@@ -6,7 +6,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-sensible'
 
   " themes
-  Plug 'NLKNguyen/papercolor-theme'
+  Plug 'dracula/vim', { 'as': 'dracula' }
 
   " add a status line 
   Plug 'itchyny/lightline.vim'
@@ -208,14 +208,13 @@ set splitright              " move cursor to the new horizontal split
 " ---------------------------------------------
 " THEME 
 " ---------------------------------------------
-colorscheme PaperColor
-set background=light
+colorscheme dracula
 
 " ---------------------------------------------
 " LIGHTLINE 
 " ---------------------------------------------
 let g:lightline = {
-      \ 'colorscheme': 'PaperColor',
+      \ 'colorscheme': 'dracula',
       \ 'component_function': {
       \   'filename': 'LightlineFilename',
       \ }
