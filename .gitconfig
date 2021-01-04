@@ -1,27 +1,23 @@
 [user]
 	name = Guilherme de Andrade
 	email = guilhermedeandrade@protonmail.com
+
 [includeIf "gitdir:~/workspace/new-work/"]
-  path = .gitconfig-new-work
+  	path = .gitconfig-new-work
+
 [core]
-  editor = vim
+  	editor = vim
 	excludesfile = ~/.gitignore_global
-	pager = diff-so-fancy | less --tabs=2 -RFX
-[color]
-	ui = true
-[color "diff-highlight"]
-	oldNormal = "#bb0000"
-	oldHighlight = "#bb0000 reverse"
-	newNormal = "#009900"
-	newHighlight = "#009900 reverse"
-[color "diff"]
-	meta = "#0000cc"
-	frag = "#333333 #dddddd"
-	func = "#666666 #dddddd"
-	old = "#bb0000"
-	new = "#009900"
-	whitespace = "#0000ff reverse"
+	pager = delta 
+
+[delta]
+   	syntax-theme = Dracula
+    
+[interactive]
+    	diffFilter = delta --color-only
+
 [init]
 	defaultBranch = main
+
 [github]
 	user = guilhermedeandrade
