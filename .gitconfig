@@ -1,23 +1,16 @@
 [user]
 	name = Guilherme de Andrade
 	email = guilhermedeandrade@protonmail.com
-
-[includeIf "gitdir:~/workspace/new-work/"]
-  	path = .gitconfig-new-work
-
 [core]
   	editor = vim
-	excludesfile = ~/.gitignore_global
-	pager = delta 
-
+	pager = delta
 [delta]
-   	syntax-theme = Dracula
-    
+   	syntax-theme = Dracula  
 [interactive]
     	diffFilter = delta --color-only
-
 [init]
 	defaultBranch = main
-
 [github]
-	user = guilhermedeandrade
+	user = ubmit
+[pull]
+	rebase = true
