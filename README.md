@@ -29,8 +29,6 @@ rsync --recursive --verbose --exclude '.git' tmpdotfiles/ $HOME/
 rm -r tmpdotfiles
 ```
 
-Note that the `main` branch is meant to be used with macOS. The `--branch` flag should be changed to either `wsl` or `manjaro` if you aren't using it.
-
 ## :runner: Getting Started
 
 **Staging**
