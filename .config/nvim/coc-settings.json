@@ -6,29 +6,21 @@
     "typescriptreact",
     "html",
     "css",
-    "json",
-    "ruby",
-    "elixir",
-    "prisma"
+    "json"
   ],
-  "codeLens.enable": true,
-  "diagnostic.virtualText": true,
+  "eslint.autoFixOnSave": true,
+  "prettier.eslintIntegration": true,
+  "prettier.stylelintIntegration": true,
   "css.validate": false,
   "less.validate": false,
   "scss.validate": false,
   "wxss.validate": false,
-  "prettier.eslintIntegration": true,
-  "prettier.stylelintIntegration": true,
-  "eslint.autoFixOnSave": true,
   "stylelintplus.autoFixOnSave": true,
   "javascript.suggest.autoImports": true,
   "typescript.suggest.autoImports": true,
   "emmet.includeLanguages": {
-    "javascript": "javascriptreact",
-    "eruby": "html",
-    "eelixir": "html"
+    "javascript": "javascriptreact"
   },
-  "solargraph.formatting": true,
-  "solargraph.diagnostics": true,
-  "solargraph.hover": true
+  "codeLens.enable": false,
+  "diagnostic.virtualText": true
 }

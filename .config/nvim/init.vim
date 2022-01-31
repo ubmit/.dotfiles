@@ -1,284 +1,87 @@
-" ---------------------------------------------
-" PLUGINS 
-" ---------------------------------------------
-call plug#begin('~/.config/nvim/plugged')
-  " add a good enough default config
-  Plug 'tpope/vim-sensible'
+" load plugins
+lua require('plugins')
 
-  " themes
-  Plug 'dracula/vim', { 'as': 'dracula' }
-
-  " add a status line 
-  Plug 'itchyny/lightline.vim'
-
-  " improve navigation between tmux panes and vim splits
-  Plug 'christoomey/vim-tmux-navigator'
-	
-  " add support for JavaScript
-  Plug 'pangloss/vim-javascript'
-
-  " add support for JSX
-  Plug 'MaxMEllon/vim-jsx-pretty'
-
-  " add support for TypeScript
-  Plug 'HerringtonDarkholme/yats.vim'
-
-  " add intellisense engine
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-  " add support for EditorConfig
-  Plug 'editorconfig/editorconfig-vim'
-
-  " add fuzzy search
-  Plug 'junegunn/fzf', { 'do': './install --bin' }
-  Plug 'junegunn/fzf.vim'
-
-  " add NERDTree file system explorer
-  Plug 'preservim/nerdtree'
-
-  " integrate NERDTree with Git 
-  Plug 'Xuyuanp/nerdtree-git-plugin'
-
-  " add syntax highlighting to NERDTree
-  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-
-  " add folders/files icons
-  Plug 'ryanoasis/vim-devicons'
-
-  " auto close (X)HTML tags
-  Plug 'alvan/vim-closetag'
-
-  " add support for styled-components
-  Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-
-  " add Git info to the gutter
-  Plug 'airblade/vim-gitgutter'
-
-  " add bindings to comment stuff out
-  Plug 'tpope/vim-commentary' 
-
-  " add support for Prisma 2
-  Plug 'pantharshit00/vim-prisma'
-
-  " add support for GraphQL
-  Plug 'jparise/vim-graphql'
-
-  " add syntax highlighting to Elixir
-  Plug 'elixir-editors/vim-elixir'
-
-  " add support for Git
-  Plug 'tpope/vim-fugitive'
-
-  " add syntax highlighting to Ruby
-  Plug 'vim-ruby/vim-ruby'
-
-  " add support for Ruby on Rails development
-  Plug 'tpope/vim-rails'
-
-  " run tests within vim 
-  Plug 'vim-test/vim-test'
-
-  " add markdown preview
-  function! BuildComposer(info)
-    if a:info.status != 'unchanged' || a:info.force
-      if has('nvim')
-        !cargo build --release --locked
-      else
-        !cargo build --release --locked --no-default-features --features json-rpc
-      endif
-    endif
-  endfunction
-
-  Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
-
-  " add snippets
-  Plug 'honza/vim-snippets'
-call plug#end()
-
-" ---------------------------------------------
-" VIM-SENSIBLE
-" ---------------------------------------------
-if &compatible
-  finish
-else
-  let g:loaded_sensible = 1
-endif
-
-if has('autocmd')
-  filetype plugin indent on
-endif
-if has('syntax') && !exists('g:syntax_on')
-  syntax enable
-endif
-
-" Use :help 'option' to see the documentation for the given option.
-
-set backspace=indent,eol,start
-set complete-=i
-
-set nrformats-=octal
-
-set ttimeout
-set ttimeoutlen=100
-
-set incsearch
-" Use <C-L> to clear the highlighting of :set hlsearch.
-if maparg('<C-L>', 'n') ==# ''
-  nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
-endif
-
-set laststatus=2
-set ruler
-set showcmd
-set wildmenu
-
-if !&scrolloff
-  set scrolloff=1
-endif
-if !&sidescrolloff
-  set sidescrolloff=5
-endif
-set display+=lastline
-
-if &encoding ==# 'latin1' && has('gui_running')
-  set encoding=utf-8
-endif
-
-if &listchars ==# 'eol:$'
-  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
-endif
-
-if v:version > 703 || v:version == 703 && has("patch541")
-  set formatoptions+=j " Delete comment character when joining commented lines
-endif
-
-if has('path_extra')
-  setglobal tags-=./tags tags^=./tags;
-endif
-
-set autoread
-set fileformats+=mac
-
-if &history < 1000
-  set history=1000
-endif
-if &tabpagemax < 50
-  set tabpagemax=50
-endif
-if !empty(&viminfo)
-  set viminfo^=!
-endif
-set sessionoptions-=options
-
-" Allow color schemes to do bright colors without forcing bold.
-if &t_Co == 8 && $TERM !~# '^linux'
-  set t_Co=16
-endif
-
-" Load matchit.vim, but only if the user hasn't installed a newer version.
-if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-  runtime! macros/matchit.vim
-endif
-
-inoremap <C-U> <C-G>u<C-U>
-
-" ---------------------------------------------
-" GENERAL 
-" ---------------------------------------------
-set nowrap                  " do not wrap lines
-
-let mapleader = "\<Space>"  " setup leader key
+" general 
+let mapleader="\<space>"
 
 set smarttab
 set autoindent
 set smartindent
+set expandtab
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 
-set expandtab               " convert tabs to the spaces
-set tabstop=2               " how many columns a tab counts for 
-set shiftwidth=2            " how many columns text is indent using reindent operations
-set softtabstop=2           " how many columns are using when hitting tab in insert mode 
+set clipboard+=unnamedplus
 
+set splitbelow
+set splitright
+
+filetype plugin indent on
+
+set number
+
+" colors
+syntax enable
 set termguicolors
-
-set clipboard+=unnamedplus  " use system clipboard
-
-set splitbelow              " move cursor to the new vertical split
-set splitright              " move cursor to the new horizontal split
-
-" ---------------------------------------------
-" THEME 
-" ---------------------------------------------
 colorscheme dracula
 
-" ---------------------------------------------
-" LIGHTLINE 
-" ---------------------------------------------
-let g:lightline = {
-      \ 'colorscheme': 'dracula',
-      \ 'component_function': {
-      \   'filename': 'LightlineFilename',
-      \ }
-      \ }
+" nvim-tree
+lua require 'nvim-tree'.setup()
+nnoremap <leader><tab> :NvimTreeFindFileToggle<CR>
 
-function! LightlineFilename()
-  let root = fnamemodify(get(b:, 'git_dir'), ':h')
-  let path = expand('%:p')
-  if path[:len(root)-1] ==# root
-    return path[len(root)+1:]
-  endif
-  return expand('%')
-endfunction
+" lualine
+lua << END
+require 'lualine'.setup {
+  options = { theme  = 'dracula-nvim' },
+}
+END
 
-" ---------------------------------------------
-" FZF 
-" ---------------------------------------------
-nnoremap <C-p> :Files<CR>
-nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>l :BLines<CR>
-nnoremap <Leader>C :Commits<CR>
+" trouble
+lua require 'trouble'.setup() 
 
-" ---------------------------------------------
-" RG 
-" ---------------------------------------------
-nnoremap <silent> <Leader>u :Rg <C-R><C-W><CR>
+" nvim-colorizer
+lua require 'colorizer'.setup()
 
-" ---------------------------------------------
-" NERDTREE 
-" ---------------------------------------------
-noremap <silent> <leader><tab> :NERDTreeToggle<CR>
+" telescope
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
-" display hidden files
-let NERDTreeShowHidden=1
+" treesitter
+lua << END
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+parser_config.markdown.used_by = "octo"
+END
 
-" ---------------------------------------------
-" CLOSETAG 
-" ---------------------------------------------
-let g:closetag_close_shortcut = ''
-let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
+" toggleterm.nvim
+lua require 'toggleterm'.setup()
 
-" ---------------------------------------------
-" COC
-" ---------------------------------------------
-" extensions
+" coc.nvim
 let g:coc_global_extensions = [
-      \ 'coc-css',
-      \ 'coc-jest',
-      \ 'coc-tsserver',
-      \ 'coc-emmet',
-      \ 'coc-html',
-      \ 'coc-yaml',
-      \ 'coc-eslint',
-      \ 'coc-prettier', 
-      \ 'coc-json',
-      \ 'coc-stylelintplus',
-      \ 'coc-pairs',
-      \ 'coc-snippets',
-      \ 'coc-prisma',
-      \ 'coc-styled-components',
-      \ 'coc-elixir',
-      \ 'coc-inline-jest',
-      \ 'coc-solargraph',
-      \ ]
+  \ 'coc-css',
+  \ 'coc-emmet',
+  \ 'coc-html',
+  \ 'coc-jest',
+  \ 'coc-json',
+  \ 'coc-lua',
+  \ 'coc-pairs',
+  \ 'coc-stylelintplus',
+  \ 'coc-snippets',
+  \ 'coc-styled-components',
+  \ 'coc-tailwindcss',
+  \ 'coc-tsserver',
+  \ 'coc-yaml'
+  \ ]
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+  let g:coc_global_extensions += ['coc-prettier']
+endif
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+  let g:coc_global_extensions += ['coc-eslint']
+endif
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -402,7 +205,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings using CoCList:
 " Show all diagnostics.
