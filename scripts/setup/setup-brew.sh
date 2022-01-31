@@ -26,7 +26,7 @@ brew install qmk/qmk/qmk
 brew install git-delta
 
 echo "Installing casks..."
-brew install --cask brave-browser
+brew install --cask brave-browser\
 brew install --cask 1password
 brew install --cask raycast
 brew install --cask dozer
@@ -40,3 +40,6 @@ brew install --cask slack
 brew install --cask discord
 brew install --cask spotify
 brew install --cask via
+brew install --cask mpv
+brew install --cask karabiner-elements
+brew install --cask notion 
