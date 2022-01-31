@@ -26,19 +26,15 @@ brew install qmk/qmk/qmk
 brew install git-delta
 
 echo "Installing casks..."
-brew install --cask docker
-brew install --cask firefox
+brew install --cask brave-browser
 brew install --cask 1password
-brew install --cask alfred
+brew install --cask raycast
 brew install --cask dozer
 brew install --cask font-jetbrains-mono-nerd-font
 brew install --cask insomnia
-brew install --cask keepingyouawake
 brew install --cask keka
 brew install --cask kitty
-brew install --cask maccy
 brew install --cask rectangle
-brew install --cask postbird
 brew install --cask visual-studio-code-insiders
 brew install --cask slack
 brew install --cask discord
